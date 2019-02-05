@@ -2,5 +2,7 @@ body {background-color:#393636; text-align:center}
 h1 {color:#FF2D00}
 p {color:#FDE007}
 a {background-color:black; color:#A1FF01}
+a:hover {background-color:black; color:yellow}
+a:active {backgroung-color:black; color:red}
 .text {padding-left: 2em; padding-right: 2em; padding-top: .2em; padding-bottom: .2em; display:inline-block}
 .choices {padding-left: 2em; padding-right: 2em; padding-top: .2em; padding-bottom: .2em; display:inline-block}
