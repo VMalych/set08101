@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  h1 #{title} cipher
+  p Message to decrypt: #{message}
+  button(onclick="decipher('" + title + "', '" + message + "');") Cipher
+  p Decrypted message: <span id="output"></span>

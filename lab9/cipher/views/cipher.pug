@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  h1 #{title} cipher
+  p Message to encrypt: #{message}
+  button(onclick="cipher('" + title + "', '" + message + "');") Cipher
+  p Encrypted message: <span id="output"></span>
