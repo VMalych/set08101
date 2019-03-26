@@ -4,4 +4,6 @@ block content
   h1 #{title} cipher
   p Message to decrypt: #{message}
   button(onclick="decipher('" + title + "', '" + message + "');") Cipher
+  button(onclick="setCookie('message', '" + message + "', 2);") Store cookie
+  button(onclick="alert(getCookie('message')") Display cookie
   p Decrypted message: <span id="output"></span>
