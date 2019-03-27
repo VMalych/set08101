@@ -1,34 +1,30 @@
-var path = require("path");
-var dbPath = path.resolve(__dirname, "count.db");
-
-var sqlite3 = require("sqlite3").verbose();
-var db = new sqlite3.Database(dbPath);
-
-db.serialize(function() {
-	db.run("CREATE TABLE IF NOT EXISTS counts (key TEXT, value INTEGER)");
-	db.run("INSERT INTO counts (key, value) VALUES (?, ?)", "counter", 0);
-});
-
 var express = require('express');
 var router = express.Router();
 
-router.get("/data", function(req, res) {
-  db.get("SELECT value FROM counts", function(err, row) {
-    res.json({"count" : row.value});
-  });
-});
+const MongoClient = require("mongodb").MongoClient;
 
-router.get("/data", function(req, res) {
-  db.run("UPDATE counts SET value = value + 1 WHERE key = ?", "counter", function(err, row) {
-    if (err) {
-      console.err(err);
-      res.status(500);
+const MONGO_URL = "mongodb+srv://ViktorMalych:9rrkGf98wxk5zlNc4eRf%21@viktorbase-44exb.mongodb.net/test?retryWrites=true";
+
+MongoClient.connect(MONGO_URL, (err, client) => {
+  var db = client.db("notetaker");
+  
+  if (err) {
+  return console.log(err);
+  }
+  
+  db.collection("notes").insertOne(
+    {
+	  title: "Hello MongoDB",
+	  text: "Hopefully this works!"
+	},
+    function (err, res) {
+	  if (err) {
+        db.close();
+        return console.log(err);
+	  }
+      client.close();
     }
-	else {
-      res.status(202);
-    }
-    res.end();
-  });
+  )
 });
 
 /* GET home page. */
